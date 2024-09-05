@@ -21,7 +21,9 @@
     "deploy": "hardhat ignition deploy ignition/modules/quickstart.ts",
     "deploy1": "hardhat deploy --network ",
     "scripts:deployAll": "hardhat run scripts/deployAll.ts",
-    "ignite": "hardhat ignition "
+    "ignite": "hardhat ignition ",
+    "deployments": "hardhat ignite deployments",
+    "status": "hardhat ignition status chain-696969"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-chai-matchers": "^2.0.4",
