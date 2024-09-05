@@ -39,3 +39,16 @@ notepad.sh
 logs/
 
 notepad.txt
+
+
+**/venv
+**/.env
+**/.venv
+client/data
+.idea
+**/.idea
+**/node_modules
+*.pyc
+
+.DS_Store
+oracles/metrics.json
