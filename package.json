@@ -59,7 +59,9 @@
     "solidity-coverage": "^0.8.6",
     "ts-node": "^10.9.2",
     "typechain": "^8.3.2",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "@xyrusworx/hardhat-solidity-json": "^1.0.2",
+    "solidity-docgen": "^0.6.0-beta.36"
   },
   "dependencies": {},
   "engines": {
