@@ -89,7 +89,7 @@ config.networks.galadriel = config.networks.g
 
 // config.networks.localhost = config.networks.hardhat
 
-import "./tasks"
+// import "./tasks"
 
 // console.log(config)
 
