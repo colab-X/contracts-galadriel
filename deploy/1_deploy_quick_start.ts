@@ -3,7 +3,7 @@ import { DeployFunction } from "hardhat-deploy/types"
 
 const ORACLE_ADDRESS: string = process.env.ORACLE_ADDRESS
 
-if (ORACLE_ADDRESS) {
+if (!ORACLE_ADDRESS) {
   throw new Error("ORACLE_ADDRESS env variable is not set.")
 }
 
