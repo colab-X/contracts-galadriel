@@ -65,6 +65,7 @@ const config: HardhatUserConfig = {
     g: {
       chainId: 696969,
       url: "https://devnet.galadriel.com/",
+      // https://explorer.galadriel.com/
     },
   },
   etherscan: {
@@ -83,6 +84,8 @@ const config: HardhatUserConfig = {
     dontOverrideCompile: false, // defaults to false
   },
 }
+
+config.galadriel = config.g
 
 // config.networks.localhost = config.networks.hardhat
 
