@@ -6,9 +6,9 @@ if (!ORACLE_ADDRESS) {
 }
 
 export default buildModule("Quickstart", (m) => {
-  const token = m.contract("Quickstart", [ORACLE_ADDRESS])
+  const quickStart = m.contract("Quickstart", [ORACLE_ADDRESS])
 
-  return { token }
+  return { quickStart }
 })
 
 // https://hardhat.org/ignition/docs/guides/creating-modules
