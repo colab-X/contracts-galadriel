@@ -17,7 +17,7 @@ const deployQuickStart: DeployFunction = async function (
   console.log(`admin: ${admin}`)
   await deploy("Quickstart", {
     from: admin,
-    args: [],
+    args: [ORACLE_ADDRESS],
     log: true,
     waitConfirmations: hre.network.config.chainId == 1337 ? 1 : 6,
   })
