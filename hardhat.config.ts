@@ -23,7 +23,16 @@ console.log(`infura key is ${INFURA_KEY}`)
 const halIp = "23.239.13.239"
 
 const config: HardhatUserConfig = {
-  solidity: "0.8.21",
+  solidity: {
+    version: "0.8.20",
+    settings: {
+      optimizer: {
+        enabled: true,
+        runs: 200
+      },
+      viaIR: true  // Enable the IR optimization to work around the "Stack too deep" error
+    }
+  },
   defaultNetwork: NETWORK,
   namedAccounts: ACCOUNT_ADDRESSES,
   networks: {
@@ -52,6 +61,10 @@ const config: HardhatUserConfig = {
       chainId: 1337,
       accounts: PRIVATE_KEYS,
       saveDeployments: true,
+    },
+    g: {
+      chainId: 696969,
+      url: "https://devnet.galadriel.com/",
     },
   },
   etherscan: {
