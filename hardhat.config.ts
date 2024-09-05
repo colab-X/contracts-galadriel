@@ -28,10 +28,10 @@ const config: HardhatUserConfig = {
     settings: {
       optimizer: {
         enabled: true,
-        runs: 200
+        runs: 200,
       },
-      viaIR: true  // Enable the IR optimization to work around the "Stack too deep" error
-    }
+      viaIR: true, // Enable the IR optimization to work around the "Stack too deep" error
+    },
   },
   defaultNetwork: NETWORK,
   namedAccounts: ACCOUNT_ADDRESSES,
@@ -85,7 +85,7 @@ const config: HardhatUserConfig = {
   },
 }
 
-config.galadriel = config.g
+config.networks.galadriel = config.networks.g
 
 // config.networks.localhost = config.networks.hardhat
 
