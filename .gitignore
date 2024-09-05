@@ -52,3 +52,6 @@ client/data
 
 .DS_Store
 oracles/metrics.json
+
+
+ignition/deployments/

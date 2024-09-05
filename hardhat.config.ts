@@ -4,6 +4,8 @@ import "@nomicfoundation/hardhat-toolbox"
 import "@nomicfoundation/hardhat-chai-matchers"
 import "@nomicfoundation/hardhat-ethers"
 import "hardhat-deploy"
+import "@nomicfoundation/hardhat-ignition"
+
 import * as dotenv from "dotenv"
 import * as process from "process"
 
