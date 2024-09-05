@@ -102,7 +102,9 @@ export const ACCOUNT_ADDRESSES = ACCOUNTS.reduce<Record<string, string>>(
 // flat list of private keys in order
 export const PRIVATE_KEYS = ACCOUNTS.map((acc) => acc.privateKey)
 
-export const getAccount = (name: string) => {
+export const getAccount = (name?: string) => {
+  if (name == "" || !name) name = "admin"
+
   const account = NAMED_ACCOUNTS[name]
   if (!account) {
     throw new Error(`Unknown account ${name}`)
