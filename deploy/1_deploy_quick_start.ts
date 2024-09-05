@@ -7,7 +7,7 @@ if (ORACLE_ADDRESS) {
   throw new Error("ORACLE_ADDRESS env variable is not set.")
 }
 
-const deployToken: DeployFunction = async function (
+const deployQuickStart: DeployFunction = async function (
   hre: HardhatRuntimeEnvironment
 ) {
   const { deployments, getNamedAccounts } = hre
@@ -24,8 +24,8 @@ const deployToken: DeployFunction = async function (
   return true
 }
 
-deployToken.id = "deployToken"
+deployQuickStart.id = "quickStart"
 
-export default deployToken
+export default deployQuickStart
 
-module.exports.tags = ["all", "dartToken"]
+module.exports.tags = ["quickStart"]
