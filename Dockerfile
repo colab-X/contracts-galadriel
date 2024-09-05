@@ -7,8 +7,8 @@ COPY ./bun.lock ./
 
 COPY . .
 
-RUN npm install -g pnpm
-RUN pnpm install
+RUN npm install -g bun
+RUN bun install
 
 
 # Deploy stage
@@ -23,6 +23,5 @@ WORKDIR /app
 
 COPY --from=builder /app ./
 
-RUN
 
 ENTRYPOINT ["npm", "run", ""]
