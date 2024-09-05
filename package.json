@@ -8,7 +8,6 @@
   "scripts": {
     "setup": "remixd -i slither",
     "pkey": "node scripts/derive-pkey.js ",
-    "postinstall": "npm run setup",
     "dev": "remixd",
     "style": "prettier -w .",
     "start": "hardhat node",
