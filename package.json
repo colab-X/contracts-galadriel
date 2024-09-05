@@ -18,8 +18,10 @@
     "clean": "hardhat clean && rm -rf deployments",
     "hardhat:local": "hardhat node",
     "test": "CONFIG=./.env hardhat test",
-    "deploy": "hardhat deploy --network ",
-    "scripts:deployAll": "hardhat run scripts/deployAll.ts"
+    "deploy": "hardhat ignition deploy ignition/modules/quickstart.ts",
+    "deploy1": "hardhat deploy --network ",
+    "scripts:deployAll": "hardhat run scripts/deployAll.ts",
+    "ignite": "hardhat ignition "
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-chai-matchers": "^2.0.4",

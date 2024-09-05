@@ -67,6 +67,7 @@ const config: HardhatUserConfig = {
     g: {
       chainId: 696969,
       url: "https://devnet.galadriel.com/",
+      accounts: PRIVATE_KEYS,
       // https://explorer.galadriel.com/
     },
   },
