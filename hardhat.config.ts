@@ -53,51 +53,6 @@ const config: HardhatUserConfig = {
       accounts: PRIVATE_KEYS,
       saveDeployments: true,
     },
-    geth: {
-      url: "http://localhost:8545",
-      ws: "ws://localhost:8546",
-      chainId: 1337,
-      accounts: PRIVATE_KEYS,
-      saveDeployments: true,
-    },
-    sepolia: {
-      url: `https://sepolia.infura.io/v3/${INFURA_KEY}`,
-      ws: `wss://sepolia.infura.io/ws/v3/${INFURA_KEY}`,
-      chainId: 11155111,
-      accounts: PRIVATE_KEYS,
-      saveDeployments: true,
-    },
-    hal: {
-      chainId: 1337,
-      url: `http://${halIp}:8545`,
-      ws: `ws://${halIp}:8546`,
-      faucet: `http://${halIp}:8085`,
-      accounts: PRIVATE_KEYS,
-      saveDeployments: true,
-    },
-    coreDao: {
-      //Testnet
-      chainId: 1115,
-      url: "https://rpc.test.btcs.network",
-      faucet: "https://scan.test.btcs.network/faucet",
-      explorer: "https://scan.test.btcs.network/",
-      accounts: PRIVATE_KEYS,
-      saveDeployments: true,
-    },
-
-    titanAI: {
-      //skale testnet
-      chainId: 1020352220,
-      url: "https://testnet.skalenodes.com/v1/aware-fake-trim-testnet",
-      ws: "wss://testnet.skalenodes.com/v1/ws/aware-fake-trim-testnet",
-      accounts: PRIVATE_KEYS,
-      saveDeployments: true,
-      // https://testnet.portal.skale.space/chains/titan
-      // https://aware-fake-trim-testnet.explorer.testnet.skalenodes.com
-
-      // Faucet:
-      // https://www.sfuelstation.com/claim-sfuel/0x9c7398aEc564B94db7B932f96d2BD8010a7e8Ee2?testnet=true
-    },
   },
   etherscan: {
     apiKey: process.env.ETHERSCAN_API_KEY,
