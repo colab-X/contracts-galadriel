@@ -19,7 +19,7 @@ const deployQuickStart: DeployFunction = async function (
     from: admin,
     args: [ORACLE_ADDRESS],
     log: true,
-    waitConfirmations: hre.network.config.chainId == 1337 ? 1 : 6,
+    // waitConfirmations: hre.network.config.chainId == 1337 ? 1 : 6,
   })
   return true
 }
