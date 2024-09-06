@@ -33,6 +33,7 @@
     "@nomicfoundation/hardhat-network-helpers": "^1.0.10",
     "@nomicfoundation/hardhat-toolbox": "^3.0.0",
     "@nomicfoundation/hardhat-verify": "^1.1.1",
+    "@nomicfoundation/hardhat-viem": "^2.0.4",
     "@openzeppelin/contracts": "^4.9.5",
     "@openzeppelin/contracts-upgradeable": "^4.9.3",
     "@remix-project/remixd": "^0.6.24",
@@ -65,7 +66,8 @@
     "solidity-docgen": "^0.6.0-beta.36",
     "ts-node": "^10.9.2",
     "typechain": "^8.3.2",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "viem": "^2.21.2"
   },
   "dependencies": {},
   "engines": {
