@@ -1,6 +1,10 @@
 // Import ethers from Hardhat package
-import { ethers } from "ethers"
 import readline from "readline"
+
+import { deployments, ethers } from "hardhat"
+import { connectContract, getWallet } from "../utils/web3"
+import { Quickstart } from "typechain-types"
+import { getAccount } from "utils/accounts"
 
 async function main() {
   const contractABI = [
@@ -8,15 +12,20 @@ async function main() {
     "function lastResponse() public view returns (string)",
   ]
 
-  if (!process.env.QUICKSTART_CONTRACT_ADDRESS) {
-    throw new Error("QUICKSTART_CONTRACT_ADDRESS env variable is not set.")
-  }
+  const quickStart = await deployments.get("Quickstart")
 
-  const contractAddress = process.env.QUICKSTART_CONTRACT_ADDRESS
+  // const quickStart = await connectContract<Quickstart>("Quickstart")
+  // const contract = quickStart.connect(getWallet("admin"))
+
+  const contractAddress = quickStart.address
+
+  console.log({ contractAddress })
+
   const [signer] = await ethers.getSigners()
+  // const signers = await getWallet("admin")
 
   // Create a contract instance
-  const contract = new ethers.Contract(contractAddress, contractABI, signer)
+  // const contract = new ethers.Contract(contractAddress, contractABI, signer)
 
   // The content of the image you want to generate
   const message = await getUserInput()
