@@ -7,7 +7,7 @@
     "./utils"
   ],
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "NodeNext",
     "esModuleInterop": true,
     "declaration": true,
     "removeComments": true,

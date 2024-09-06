@@ -22,8 +22,6 @@ const INFURA_KEY = process.env.INFURA_KEY || ""
 
 console.log(`infura key is ${INFURA_KEY}`)
 
-const halIp = "23.239.13.239"
-
 const config: HardhatUserConfig = {
   solidity: {
     version: "0.8.20",

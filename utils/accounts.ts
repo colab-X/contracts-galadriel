@@ -1,7 +1,7 @@
 // IMPORTANT: we cannot import hardhat directly here
 // because it will cause a circular dependency
 import { Account } from "./types"
-import { ethers, Wallet } from "ethers"
+import { ethers } from "hardhat"
 import * as process from "process"
 import { HardhatRuntimeEnvironment } from "hardhat/types"
 
