@@ -22,8 +22,8 @@ async function main() {
     // const contract = new ethers.Contract(contractAddress, contractABI, signer)
 
     // The content of the image you want to generate
-    let message: string = "Generate a cover image for my cartoon about space explorers, in anime style with a boy and girl"
-    message = await getUserInput()
+    // const message: string = await getUserInput()
+    const message: string = "Generate a cover image for my cartoon about space explorers, in anime style with a boy and girl"
     console.log(`Image generation started with message: "${message}"`)
 
     // Call the startChat function
