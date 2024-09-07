@@ -1,9 +1,9 @@
 {
-  "name": "collab-x-galadriel-contracts",
+  "name": "colab-x-galadriel-contracts",
   "version": "0.1.0",
   "license": "Apache-2.0",
   "private": true,
-  "description": "Collab-X : AI 1st decentralized Hub for all creators",
+  "description": "ColabX : AI 1st decentralized Hub for all creators",
   "author": "Hiro <laciferin@gmail.com>",
   "scripts": {
     "setup": "remixd -i slither",
@@ -11,7 +11,8 @@
     "dev": "remixd",
     "style": "prettier -w .",
     "start": "hardhat node",
-    "prebuild": "hardhat clean",
+    "prebuild_": "hardhat clean",
+    "b": "bun run build",
     "build": "hardhat compile",
     "postbuild": "hardhat typechain",
     "build1": "export TS_NODE_TRANSPILE_ONLY=1 && echo 'run when hardhat fails due to insufficient types' && hardhat compile",

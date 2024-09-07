@@ -7,8 +7,9 @@ set positional-arguments
 
 
 
-try *ARGS:
+deploy *ARGS:
     pnpm hardhat deploy {{ARGS}}
 
 run *ARGS:
     pnpm hardhat run {{ARGS}}
+

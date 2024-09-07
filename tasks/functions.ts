@@ -143,7 +143,7 @@ async function getContract(
   hre: HardhatRuntimeEnvironment
 ): Promise<Contract> {
   const signer = (await hre.ethers.getSigners())[0];
-  const ContractArtifact = await hre.artifacts.readArtifact(name);
+  const ContractArtifact = await hre.artifacts.reaColabXifact(name);
   return new hre.ethers.Contract(contractAddress, ContractArtifact.abi, signer);
 }
 
