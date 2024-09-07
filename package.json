@@ -12,6 +12,7 @@
     "style": "prettier -w .",
     "start": "hardhat node",
     "prebuild": "hardhat clean",
+    "b": "bun run build",
     "build": "hardhat compile",
     "postbuild": "hardhat typechain",
     "build1": "export TS_NODE_TRANSPILE_ONLY=1 && echo 'run when hardhat fails due to insufficient types' && hardhat compile",

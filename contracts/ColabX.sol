@@ -3,6 +3,14 @@ pragma solidity ^0.8.9;
 
 import "./interfaces/IOracle.sol";
 
+interface Oracle {
+    function requestAIResponse(
+        uint256 requestId,
+        string memory prompt,
+        string memory taskType
+    ) external;
+}
+
 contract ColabX {
     // Owner of the contract
     address public owner;
