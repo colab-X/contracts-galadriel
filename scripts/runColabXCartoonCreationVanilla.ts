@@ -104,29 +104,6 @@ async function main() {
     console.log(`Image generation completed, image URL: ${job.response}`)
 }
 
-async function getUserInput(): Promise<string | undefined> {
-    const rl = readline.createInterface({
-        input: process.stdin,
-        output: process.stdout,
-    })
-
-    const question = (query: string): Promise<string> => {
-        return new Promise((resolve) => {
-            rl.question(query, (answer) => {
-                resolve(answer)
-            })
-        })
-    }
-
-    try {
-        const input = await question("Enter an image description: ")
-        rl.close()
-        return input
-    } catch (err) {
-        console.error("Error getting user input:", err)
-        rl.close()
-    }
-}
 
 main()
     .then(() => process.exit(0))
