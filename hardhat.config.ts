@@ -72,11 +72,11 @@ const config: HardhatUserConfig = {
   etherscan: {
     apiKey: process.env.ETHERSCAN_API_KEY,
   },
-  // sourcify: {
-  //     // Disabled by default
-  //     // Doesn't need an API key
-  //     enabled: true
-  // }
+  sourcify: {
+    // Disabled by default
+    // Doesn't need an API key
+    enabled: true,
+  },
   typechain: {
     outDir: "typechain-types",
     target: "ethers-v6",

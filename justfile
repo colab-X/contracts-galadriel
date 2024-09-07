@@ -1,4 +1,4 @@
-cset shell := ["sh", "-c"]
+set shell := ["sh", "-c"]
 set windows-shell := ["powershell.exe", "-NoLogo", "-Command"]
 #set allow-duplicate-recipe
 set positional-arguments
@@ -7,8 +7,5 @@ set positional-arguments
 
 
 
-deploy NETWORK="hal":
-    npx hardhat deploy --network {{NETWORK}}
-
-t:
-    pnpm run t --bail --grep "Results"; 
+try *ARGS:
+    bunx hardhat deploy {{ARGS}}
