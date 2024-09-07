@@ -5,6 +5,7 @@ import { deployments } from "hardhat"
 import { connectContract, getWallet } from "../utils/web3"
 import { Quickstart } from "typechain-types"
 import { getAccount } from "utils/accounts"
+import bluebird from "bluebird"
 
 async function main() {
   const quickStartContract = await deployments.get("Quickstart")
@@ -33,7 +34,8 @@ async function main() {
   // print w/o newline
   console.log("Waiting for response: ")
   while (newResponse === lastResponse) {
-    await new Promise((resolve) => setTimeout(resolve, 1000))
+    // await new Promise((resolve) => setTimeout(resolve, 1000))
+    await bluebird.delay(1000)
     newResponse = await contract.lastResponse()
     console.log(".")
   }
