@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "license": "Apache-2.0",
   "private": true,
-  "description": "Collab-X : AI 1st decentralized Hub for all creators",
+  "description": "ColabX : AI 1st decentralized Hub for all creators",
   "author": "Hiro <laciferin@gmail.com>",
   "scripts": {
     "setup": "remixd -i slither",

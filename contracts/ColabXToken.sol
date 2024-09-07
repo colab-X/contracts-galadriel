@@ -34,84 +34,95 @@ import "./ControllerOwnable.sol";
   now, only the payments contract can call the escrow functions that pay out
 
  */
-contract CollabXToken is ControllerOwnable, ERC20, ERC20Pausable {
+contract ColabXToken is ControllerOwnable, ERC20, ERC20Pausable {
+    // keep track of the current escrow balance for each address
+    mapping(address => uint256) private escrowBalances;
 
-  // keep track of the current escrow balance for each address
-  mapping(address => uint256) private escrowBalances;
+    constructor(
+        string memory name,
+        string memory symbol,
+        uint256 initialSupply
+    ) ERC20(name, symbol) {
+        _mint(msg.sender, initialSupply);
+    }
 
-  constructor(
-    string memory name,
-    string memory symbol,
-    uint256 initialSupply
-  ) ERC20(name, symbol) {
-    _mint(msg.sender, initialSupply);
-  }
+    function escrowBalanceOf(address _address) public view returns (uint256) {
+        return escrowBalances[_address];
+    }
 
-  function escrowBalanceOf(
-    address _address
-  ) public view returns (uint256) {
-    return escrowBalances[_address];
-  }
+    // money being paid into the escrow account
+    function payEscrow(uint256 amount) public returns (bool) {
+        // it's important we use tx.origin and not msg.sender here
+        // msg.sender will be the payments contract
+        // tx.origin will be the user who called the controller -> payments -> token
+        // i.e. the account that is actually paying into the escrow address
+        _transfer(tx.origin, address(this), amount);
+        escrowBalances[tx.origin] += amount;
+        return true;
+    }
 
-  // money being paid into the escrow account
-  function payEscrow(
-    uint256 amount
-  ) public returns (bool) {
-    // it's important we use tx.origin and not msg.sender here
-    // msg.sender will be the payments contract
-    // tx.origin will be the user who called the controller -> payments -> token
-    // i.e. the account that is actually paying into the escrow address
-    _transfer(tx.origin, address(this), amount);
-    escrowBalances[tx.origin] += amount;
-    return true;
-  }
+    // money being paid back from the escrow account
+    function refundEscrow(
+        address toAddress,
+        uint256 amount
+    ) public onlyController returns (bool) {
+        require(
+            toAddress != address(0),
+            "ColabXToken: toAddress cannot be zero address"
+        );
+        require(
+            escrowBalances[toAddress] >= amount,
+            "ColabXToken: not enough funds in escrow"
+        );
+        escrowBalances[toAddress] -= amount;
+        _transfer(address(this), toAddress, amount);
+        return true;
+    }
 
-  // money being paid back from the escrow account
-  function refundEscrow(
-    address toAddress,
-    uint256 amount
-  ) public onlyController returns (bool) {
-    require(toAddress != address(0), "CollabXToken: toAddress cannot be zero address");
-    require(escrowBalances[toAddress] >= amount, "CollabXToken: not enough funds in escrow");
-    escrowBalances[toAddress] -= amount;
-    _transfer(address(this), toAddress, amount);
-    return true;
-  }
+    // pay the RP account from the JC escrow account
+    function payJob(
+        address fromAddress,
+        address toAddress,
+        uint256 amount
+    ) public onlyController returns (bool) {
+        require(
+            escrowBalances[fromAddress] >= amount,
+            "ColabXToken: not enough funds in escrow"
+        );
+        escrowBalances[fromAddress] -= amount;
+        _transfer(address(this), toAddress, amount);
+        return true;
+    }
 
-  // pay the RP account from the JC escrow account
-  function payJob(
-    address fromAddress,
-    address toAddress,
-    uint256 amount
-  ) public onlyController returns (bool) {
-    require(escrowBalances[fromAddress] >= amount, "CollabXToken: not enough funds in escrow");
-    escrowBalances[fromAddress] -= amount;
-    _transfer(address(this), toAddress, amount);
-    return true;
-  }
+    // the given party has been slashed so the money stays in the contract
+    // TODO: what should happen to slashed funds?
+    // at the moment we move them to the owner address so they are not locked
+    function slashEscrow(
+        address slashedAddress,
+        uint256 amount
+    ) public onlyController returns (bool) {
+        require(
+            escrowBalances[slashedAddress] >= amount,
+            "ColabXToken: not enough funds in escrow"
+        );
+        escrowBalances[slashedAddress] -= amount;
+        _transfer(address(this), owner(), amount);
+        return true;
+    }
 
-  // the given party has been slashed so the money stays in the contract
-  // TODO: what should happen to slashed funds?
-  // at the moment we move them to the owner address so they are not locked
-  function slashEscrow(
-    address slashedAddress,
-    uint256 amount
-  ) public onlyController returns (bool) {
-    require(escrowBalances[slashedAddress] >= amount, "CollabXToken: not enough funds in escrow");
-    escrowBalances[slashedAddress] -= amount;
-    _transfer(address(this), owner(), amount);
-    return true;
-  }
+    function pause() public onlyOwner {
+        _pause();
+    }
 
-  function pause() public onlyOwner {
-      _pause();
-  }
+    function unpause() public onlyOwner {
+        _unpause();
+    }
 
-  function unpause() public onlyOwner {
-      _unpause();
-  }
-
-  function _beforeTokenTransfer(address from, address to, uint256 amount) internal override(ERC20, ERC20Pausable) {
-      super._beforeTokenTransfer(from, to, amount);
-  }
+    function _beforeTokenTransfer(
+        address from,
+        address to,
+        uint256 amount
+    ) internal override(ERC20, ERC20Pausable) {
+        super._beforeTokenTransfer(from, to, amount);
+    }
 }

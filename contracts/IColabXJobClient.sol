@@ -4,10 +4,10 @@ pragma solidity ^0.8.6;
 // a smart contract that is running a job
 // it will call the IOnChainJobManager with it's job
 // which will end up with the resultsAdded function being called by the manager
-interface ICollabXJobClient {
-  function submitResults(
-    uint256 id,
-    string memory dealId,
-    string memory dataId
-  ) external;
+interface IColabXJobClient {
+    function submitResults(
+        uint256 id,
+        string memory dealId,
+        string memory dataId
+    ) external;
 }

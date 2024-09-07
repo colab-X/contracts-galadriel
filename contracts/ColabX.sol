@@ -3,7 +3,7 @@ pragma solidity ^0.8.9;
 
 import "./interfaces/IOracle.sol";
 
-contract CollabX {
+contract ColabX {
     // Owner of the contract
     address public owner;
 
