@@ -8,4 +8,4 @@ set positional-arguments
 
 
 try *ARGS:
-    bunx hardhat deploy {{ARGS}}
+    pnpm hardhat deploy {{ARGS}}
