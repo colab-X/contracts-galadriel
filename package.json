@@ -11,7 +11,7 @@
     "dev": "remixd",
     "style": "prettier -w .",
     "start": "hardhat node",
-    "prebuild": "hardhat clean",
+    "prebuild_": "hardhat clean",
     "b": "bun run build",
     "build": "hardhat compile",
     "postbuild": "hardhat typechain",

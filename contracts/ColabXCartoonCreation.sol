@@ -11,7 +11,10 @@ contract ColabXCartoonCreation is Ownable, Initializable, OracleClient {
 
     enum JobStatus { InProgress, Success, Failed }
 
+    event JobUpdated (uint indexed jobId, JobStatus jobStatus);
+
     struct Job {
+        uint id;
         string message;
         string response;     // The oracle response (success or error message)
         JobStatus status;    // The status of the job (in progress, success, or failed)
@@ -27,13 +30,16 @@ contract ColabXCartoonCreation is Ownable, Initializable, OracleClient {
     // Initiate a new job with a message for the oracle
     function initJob(string memory message) public returns (uint) {
         uint currentId = jobCount;
-        jobCount = currentId + 1;
+        jobCount++;
+
+        JobStatus jobStatus = JobStatus.InProgress;
 
         // Store the job details in the mapping with status InProgress
         jobs[currentId] = Job({
+            id:currentId,
             message: message,
             response: "",
-            status: JobStatus.InProgress
+            status: jobStatus
         });
 
         // Call the oracle to create the function call
@@ -42,6 +48,8 @@ contract ColabXCartoonCreation is Ownable, Initializable, OracleClient {
             "image_generation",
             message
         );
+
+        emit JobUpdated(currentId, jobStatus);
 
         return currentId;
     }
@@ -63,17 +71,25 @@ contract ColabXCartoonCreation is Ownable, Initializable, OracleClient {
         } else {
             job.status = JobStatus.Failed;
         }
+
+        emit JobUpdated(runId, job.status);
+    }
+
+
+    modifier checkJobId (uint jobId){
+        require(jobId < jobCount, "Invalid job ID");
+        _;
     }
 
     // Retrieve the details of a job by job ID
     function getJobDetails(uint jobId) public view returns (Job memory) {
-        require(jobId < jobCount, "Invalid job ID");
+        checkJobId(jobId);
         return jobs[jobId];
     }
 
     // Get the status and response for a specific job
     function getJobStatus(uint jobId) public view returns (JobStatus status, string memory response) {
-        require(jobId < jobCount, "Invalid job ID");
+        checkJobId(jobId);
 
         Job storage job = jobs[jobId];
         return (job.status, job.response);
