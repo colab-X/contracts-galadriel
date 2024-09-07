@@ -97,4 +97,8 @@ contract ColabXCartoonCreation is Ownable, Initializable, OracleClient {
         Job storage job = jobs[jobId];
         return (job.status, job.response);
     }
+
+    function compareStrings(string memory a, string memory b) public pure returns (bool) {
+        return keccak256(abi.encodePacked(a)) == keccak256(abi.encodePacked(b));
+    }
 }
