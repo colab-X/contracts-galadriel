@@ -54,6 +54,12 @@ contract ColabXCartoonCreation is Ownable, Initializable, OracleClient {
         return currentId;
     }
 
+
+    function checkJobId (uint jobId) public view returns (bool){
+//        require(jobId < jobCount, "Invalid job ID");
+        return jobId<jobCount;
+    }
+
     // Handle the response from the oracle
     function onOracleFunctionResponse(
         uint runId,
@@ -75,21 +81,15 @@ contract ColabXCartoonCreation is Ownable, Initializable, OracleClient {
         emit JobUpdated(runId, job.status);
     }
 
-
-    modifier checkJobId (uint jobId){
-        require(jobId < jobCount, "Invalid job ID");
-        _;
-    }
-
     // Retrieve the details of a job by job ID
     function getJobDetails(uint jobId) public view returns (Job memory) {
-        checkJobId(jobId);
+        require(jobId < jobCount, "Invalid job ID");
         return jobs[jobId];
     }
 
     // Get the status and response for a specific job
     function getJobStatus(uint jobId) public view returns (JobStatus status, string memory response) {
-        checkJobId(jobId);
+        require(jobId < jobCount, "Invalid job ID");
 
         Job storage job = jobs[jobId];
         return (job.status, job.response);
