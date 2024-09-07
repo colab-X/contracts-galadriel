@@ -21,7 +21,7 @@ async function main() {
 
     // The content of the image you want to generate
     // const message: string = await getUserInput()
-    const message: string = "tom and jerry"
+    const message: string = "Generate a cover image for my cartoon about space explorers, in anime style with a boy and girl"
     console.log(`Image generation started with message: "${message}"`)
 
     // Call the startChat function
@@ -55,16 +55,16 @@ async function main() {
 
     // jobStatus started
     while (job.status.toString() == '0')  {
-        console.log({
-            id: job.id.toString(),
-            jobStatus: job.status.toString(),
-            message: job.message,
-            response: job.response,
-        })
         await bluebird.delay(1000)
         job = await contract.getJobDetails(jobId)
         console.log(".")
     }
+    console.log({
+        id: job.id.toString(),
+        jobStatus: job.status.toString(),
+        message: job.message,
+        response: job.response,
+    })
 
     console.log(`Image generation completed, image URL: ${job.response}`)
 }
