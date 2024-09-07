@@ -8,15 +8,30 @@ import {getAccount} from "utils/accounts"
 import bluebird from "bluebird"
 import JobStruct = ColabXCartoonCreation.JobStruct;
 import {JobAddedEvent} from "../typechain-types/contracts/ColabXOnChainJobCreator";
+import {ethers} from "ethers";
 
 async function main() {
     const contractName = "ColabXCartoonCreation"
-    // const quickStartContract = await deployments.get(contractName)
+    const colabXCartoon = await deployments.get(contractName)
 
-    const quickStart = await connectContract<ColabXCartoonCreation>(contractName)
-    const contract = quickStart.connect(getWallet("admin"))
+    // const collabXConnect = await connectContract<ColabXCartoonCreation>(contractName)
+    // const contract = quickStart.connect(getWallet("admin"))
+    //
+    // console.log({contractAddress: await contract.getAddress()})
+    //
 
-    console.log({contractAddress: await contract.getAddress()})
+
+    let contractAddress = "0xd1fB2a15545032a8170370d7eC47C0FC69A00eed"
+    contractAddress = colabXCartoon.address
+
+    const contractABI = [
+        "function initJob(string memory message) public returns (uint)",
+        "function getJobDetails(uint jobId) public view returns (Job memory)",
+    ]
+    const signer = getWallet("admin")
+
+    const contract = new ethers.Contract(contractAddress, contractABI, signer)
+
 
     // Create a contract instance
     // const contract = new ethers.Contract(contractAddress, contractABI, signer)
@@ -24,7 +39,12 @@ async function main() {
     // The content of the image you want to generate
     // const message: string = await getUserInput()
     const message: string = "Generate a cover image for my cartoon about space explorers, in anime style with a boy and girl"
-    console.log(`Image generation started with message: "${message}"`)
+    console.log(`
+    Image
+    generation
+    started
+    with message:
+    "${message}"`)
 
     // Call the startChat function
     const transactionResponse = await contract.initJob(message)
@@ -32,14 +52,18 @@ async function main() {
 
     const receipt = await transactionResponse.wait()
     console.log(
-        `Transaction sent, hash: ${receipt.hash}.\nExplorer: https://explorer.galadriel.com/tx/${receipt.hash}`
-    )
+        `
+    Transaction
+    sent, hash
+: ${receipt.hash}
+.\nExplorer: https://explorer.galadriel.com/tx/${receipt.hash}`
+        )
 
     // console.log({receipt})
 
     // const jobId = await transactionResponse
 
-    let jobId ;
+    let jobId;
 
     receipt.logs.forEach((log) => {
         const logs = contract.interface.parseLog(log as any);
@@ -58,7 +82,7 @@ async function main() {
 
 
     // jobStatus started
-    while (job.status.toString() == '0')  {
+    while (job.status.toString() == '0') {
         await bluebird.delay(1000)
         job = await contract.getJobDetails(jobId)
         console.log(".")

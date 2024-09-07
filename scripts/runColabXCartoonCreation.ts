@@ -11,10 +11,9 @@ import {JobAddedEvent} from "../typechain-types/contracts/ColabXOnChainJobCreato
 
 async function main() {
     const contractName = "ColabXCartoonCreation"
-    // const quickStartContract = await deployments.get(contractName)
 
-    const quickStart = await connectContract<ColabXCartoonCreation>(contractName)
-    const contract = quickStart.connect(getWallet("admin"))
+    const colabXConnect = await connectContract<ColabXCartoonCreation>(contractName)
+    const contract = colabXConnect.connect(getWallet("admin"))
 
     console.log({contractAddress: await contract.getAddress()})
 
