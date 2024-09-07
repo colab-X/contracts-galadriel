@@ -58,24 +58,20 @@ library SharedStructs {
 
   // the various addresses involved in runnig a deal
   struct DealMembers {
-    // the address of the solver service that the RP and JC have agreed to use
-    address solver;
     // the addresses of the RP and JC that have agreed to this deal
     address jobCreator;
     address resourceProvider;
-    // the list of mediators that the RP and JC have agreed to use
-    address[] mediators;
   }
 
   // a timeout represents the agreed amount of time and the penalty
-  // that is applied if the timeout is exceeded  
+  // that is applied if the timeout is exceeded
   struct DealTimeout {
     uint256 timeout;
     uint256 collateral;
   }
-  
+
   // the various forms of timeout a deal can have
-  struct DealTimeouts { 
+  struct DealTimeouts {
     DealTimeout agree;
     DealTimeout submitResults;
     DealTimeout judgeResults;
@@ -111,12 +107,12 @@ library SharedStructs {
 
     // who is participating in this deal
     DealMembers members;
-    
+
     // the timeout settings for a deal
     DealTimeouts timeouts;
 
     // the pricing settings for a deal
-    DealPricing pricing;    
+    DealPricing pricing;
   }
 
   // what the RP submits back once having run the job
@@ -162,7 +158,7 @@ library SharedStructs {
 
   struct JobOffer {
     uint256 id;
-    
+
     // this is the contract that will be triggered
     // once there are some results
     address calling_contract;

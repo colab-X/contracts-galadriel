@@ -61,7 +61,7 @@ contract ColabXStorage is ControllerOwnable, Initializable {
         require(members.mediators.length > 0, "Mediators <= 0"); //TODO: make it necessary only if JC!=RP
 
         //    if (members.resourceProvider != members.jobCreator){
-        //      //TODO: ColabXController.sol, ColabXMediationRandom.sol changes required to support 0 mediator cases.
+        //      //TODO: ColabXController.sol changes required to support 0 mediator cases.
         //      require(members.mediators.length > 0, "Mediators <= 0");
         //    }
 

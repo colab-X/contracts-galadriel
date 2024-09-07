@@ -7,7 +7,6 @@ import "./SharedStructs.sol";
 import "./IColabXController.sol";
 import "./IColabXStorage.sol";
 import "./IColabXPayments.sol";
-import "./IColabXMediation.sol";
 
 contract ColabXController is IColabXController, Ownable, Initializable {
     /**
@@ -17,7 +16,6 @@ contract ColabXController is IColabXController, Ownable, Initializable {
     address private storageAddress;
     address private userAddress;
     address private paymentsAddress;
-    address private mediationAddress;
     address private jobCreatorAddress;
 
     IColabXStorage private storageContract;
