@@ -5,6 +5,7 @@ import "./interfaces/IOracle.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import {OracleClient} from "./OracleClient.sol";
+import {IOracleClient} from "./interfaces/IOracleClient.sol";
 
 contract ColabXCartoonCreation is Ownable, Initializable, OracleClient {
     uint public jobCount;
@@ -64,18 +65,20 @@ contract ColabXCartoonCreation is Ownable, Initializable, OracleClient {
     function onOracleFunctionResponse(
         uint runId,
         string memory response,
-        bool isSuccess
+        string memory errorMessage
     ) public onlyOracle {
         require(runId < jobCount, "Invalid job ID");
 
+        bool isSuccess = bytes(response).length!=0;
+
         Job storage job = jobs[runId];
 
-        // Update the job with the response and the final status
-        job.response = response;
         if (isSuccess) {
             job.status = JobStatus.Success;
+            job.response = response;
         } else {
             job.status = JobStatus.Failed;
+            job.response = errorMessage;
         }
 
         emit JobUpdated(runId, job.status);

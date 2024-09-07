@@ -2,8 +2,9 @@
 pragma solidity ^0.8.20;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
+import {IOracleClient} from "./interfaces/IOracleClient.sol";
 
-contract OracleClient is Ownable{
+abstract contract OracleClient is Ownable, IOracleClient{
     address public oracleAddress;
     event OracleAddressUpdated(address indexed newOracleAddress);
 
