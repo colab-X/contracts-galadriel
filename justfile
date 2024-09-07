@@ -11,4 +11,4 @@ try *ARGS:
     pnpm hardhat deploy {{ARGS}}
 
 run *ARGS:
-    pnpm hardhat run {{ARGS}}
+    pnpm hardhat run scripts/{{ARGS}}
