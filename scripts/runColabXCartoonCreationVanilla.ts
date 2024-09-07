@@ -1,6 +1,8 @@
 // Import ethers from Hardhat package
 import readline from "readline"
 
+import contractAbi from "../deployments/g/ColabXCartoonCreation.json"
+
 import {deployments} from "hardhat"
 import {connectContract, getWallet} from "../utils/web3"
 import {ColabXCartoonCreation, Quickstart} from "typechain-types"
@@ -9,6 +11,7 @@ import bluebird from "bluebird"
 import JobStruct = ColabXCartoonCreation.JobStruct;
 import {JobAddedEvent} from "../typechain-types/contracts/ColabXOnChainJobCreator";
 import {ethers} from "ethers";
+import * as fs from "node:fs";
 
 async function main() {
     const contractName = "ColabXCartoonCreation"
@@ -24,10 +27,14 @@ async function main() {
     let contractAddress = "0xd1fB2a15545032a8170370d7eC47C0FC69A00eed"
     contractAddress = colabXCartoon.address
 
-    const contractABI = [
+    let contractABI: string[] | any = [
         "function initJob(string memory message) public returns (uint)",
         "function getJobDetails(uint jobId) public view returns (Job memory)",
     ]
+    contractABI = contractAbi.abi
+
+    // console.log(contractABI)
+
     const signer = getWallet("admin")
 
     const contract = new ethers.Contract(contractAddress, contractABI, signer)
