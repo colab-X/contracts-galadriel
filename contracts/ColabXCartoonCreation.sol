@@ -12,19 +12,8 @@ contract ColabXCartoonCreation is Ownable, Initializable, OracleClient {
 
     uint public callsCount;
 
-    event OracleAddressUpdated(address indexed newOracleAddress);
-
     function initialize(address _oracleAddress) public initializer{
         setOracleAddress(_oracleAddress);
-    }
-
-
-
-    function setOracleAddress(address newOracleAddress) public onlyOwner {
-        require(newOracleAddress != address(0), "Invalid Oracle Address: zero address");
-        require(oracleAddress!=newOracleAddress, "Oracle Address is same");
-        oracleAddress = newOracleAddress;
-        emit OracleAddressUpdated(newOracleAddress);
     }
 
     function initJob(string memory message) public returns (uint) {
