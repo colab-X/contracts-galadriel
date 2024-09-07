@@ -1,7 +1,7 @@
 // IMPORTANT: we cannot import hardhat directly here
 // because it will cause a circular dependency
 import { Account } from "./types"
-import { ethers } from "hardhat"
+import  {ethers, Wallet}  from "ethers"
 import * as process from "process"
 import { HardhatRuntimeEnvironment } from "hardhat/types"
 
@@ -155,7 +155,7 @@ export function getAddress(addressOrPrivateKey: string): string {
     address = addressOrPrivateKey
   } else {
     try {
-      const wallet = new ethers.Wallet(addressOrPrivateKey)
+      const wallet = new Wallet(addressOrPrivateKey)
       address = wallet.address
     } catch (error) {
       console.error(error)
