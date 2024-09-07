@@ -11,5 +11,5 @@ deploy *ARGS:
     pnpm hardhat deploy {{ARGS}}
 
 run *ARGS:
-    pnpm hardhat run scripts/{{ARGS}}
+    pnpm hardhat run {{ARGS}}
 

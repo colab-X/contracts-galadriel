@@ -29,21 +29,33 @@ async function main() {
   )
   console.log(`Image generation started with message: "${message}"`)
 
-  const jobId = receipt.getResult()
+  // console.log({receipt})
+
+  // const jobId = await transactionResponse
+
+  let jobId = 0;
+
+  receipt.logs.forEach((log) => {
+    const logs = contract.interface.parseLog(log as any);
+    if (!logs) return;
+    jobId = Number(logs.args[0]);
+  });
+
+  console.log(`Job ID: ${jobId}`)
 
   let job = await contract.getJobDetails(jobId)
 
   // print w/o newline
   console.log("Waiting for response: ")
 
-
+console.log({job})
   while (job.status!=0) {
     await bluebird.delay(1000)
     job = await contract.getJobStatus()
     console.log(".")
   }
 
-  console.log(`Image generation completed, image URL: ${newResponse}`)
+  console.log(`Image generation completed, image URL: ${job.response}`)
 }
 
 async function getUserInput(): Promise<string | undefined> {
