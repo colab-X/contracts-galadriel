@@ -5,10 +5,9 @@ import "./interfaces/IOracle.sol";
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
+import {OracleClient} from "./OracleClient.sol";
 
-contract ColabXCartoonCreation is Ownable, Initializable {
-    address public oracleAddress;
-
+contract ColabXCartoonCreation is Ownable, Initializable, OracleClient {
     string public lastResponse;
 
     uint public callsCount;
@@ -19,10 +18,7 @@ contract ColabXCartoonCreation is Ownable, Initializable {
         setOracleAddress(_oracleAddress);
     }
 
-    modifier onlyOracle() {
-        require(msg.sender == oracleAddress, "Caller is not oracle");
-        _;
-    }
+
 
     function setOracleAddress(address newOracleAddress) public onlyOwner {
         require(newOracleAddress != address(0), "Invalid Oracle Address: zero address");
