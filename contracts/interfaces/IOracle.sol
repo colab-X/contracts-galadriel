@@ -2,7 +2,6 @@
 pragma solidity ^0.8.13;
 
 interface IOracle {
-
     struct Content {
         string contentType;
         string value;
@@ -10,7 +9,7 @@ interface IOracle {
 
     struct Message {
         string role;
-        Content [] content;
+        Content[] content;
     }
 
     struct OpenAiRequest {
@@ -43,18 +42,15 @@ interface IOracle {
 
     struct OpenAiResponse {
         string id;
-
         // either content is an empty str or functionName and functionArguments
         string content;
         string functionName;
         string functionArguments;
-
         uint64 created;
         string model;
         string systemFingerprint;
         // kind of pointless since its always "chat.completion"?
         string object;
-
         uint32 completionTokens;
         uint32 promptTokens;
         uint32 totalTokens;
@@ -86,15 +82,12 @@ interface IOracle {
 
     struct GroqResponse {
         string id;
-
         string content;
-
         uint64 created;
         string model;
         string systemFingerprint;
         // kind of pointless since its always "chat.completion"?
         string object;
-
         uint32 completionTokens;
         uint32 promptTokens;
         uint32 totalTokens;
@@ -130,23 +123,19 @@ interface IOracle {
 
     struct LlmResponse {
         string id;
-
         // either content is an empty str or functionName and functionArguments
         string content;
         string functionName;
         string functionArguments;
-
         uint64 created;
         string model;
         string systemFingerprint;
         // kind of pointless since its always "chat.completion"?
         string object;
-
         uint32 completionTokens;
         uint32 promptTokens;
         uint32 totalTokens;
     }
-
 
     struct KnowledgeBaseQueryRequest {
         string cid;
@@ -154,9 +143,7 @@ interface IOracle {
         uint32 num_documents;
     }
 
-    function createLlmCall(
-        uint promptId
-    ) external returns (uint);
+    function createLlmCall(uint promptId) external returns (uint);
 
     function createLlmCall(
         uint promptId,
