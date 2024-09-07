@@ -1,17 +1,11 @@
 // Import ethers from Hardhat package
-import readline from "readline"
-
 import contractAbi from "../deployments/g/ColabXCartoonCreation.json"
 
 import {deployments} from "hardhat"
-import {connectContract, getWallet} from "../utils/web3"
-import {ColabXCartoonCreation, Quickstart} from "typechain-types"
-import {getAccount} from "utils/accounts"
+import {getWallet} from "../utils/web3"
+import {ColabXCartoonCreation} from "typechain-types"
 import bluebird from "bluebird"
-import JobStruct = ColabXCartoonCreation.JobStruct;
-import {JobAddedEvent} from "../typechain-types/contracts/ColabXOnChainJobCreator";
 import {ethers} from "ethers";
-import * as fs from "node:fs";
 
 async function main() {
     const contractName = "ColabXCartoonCreation"
